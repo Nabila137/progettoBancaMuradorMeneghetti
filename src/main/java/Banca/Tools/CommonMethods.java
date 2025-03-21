@@ -1,4 +1,4 @@
-package Tools;
+package main.java.Tools;
 
 public class CommonMethods {
 	

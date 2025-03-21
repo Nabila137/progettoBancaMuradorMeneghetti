@@ -1,7 +1,7 @@
-package Banca;
+package main.java.Banca;
 
 import java.util.Vector;
-import Tools.*;
+import main.java.Tools.*;
 
 public class Bank {
 	

@@ -1,4 +1,4 @@
-package Banca;
+package main.java.Banca;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import Tools.Files_Methods;
+import main.java.Tools.Files_Methods;
 import java.io.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -18,26 +18,26 @@ public class LoginFrame extends JFrame {
 	//private JTextField emailField;
 	//JCheckbox
 	private final JFrame frame;
-	private final JFrame frame2;
+	//private final JFrame frame2;
 	private JLabel messageLabel;
     private final JTextField usernameField;
     private final JPasswordField passwordField;
-    private final JTextField name;
-    private final JTextField cognome;
-    private final JTextField portafoglio;
-    private final JTextField securityQuestion;
+    //private final JTextField name;
+    //private final JTextField cognome;
+    //private final JTextField portafoglio;
+    //private final JTextField securityQuestion;
     //private final JCheckBox rememberMeCheckBox;
 	
 	public LoginFrame () {
 		
-		frame2 = new JFrame ("Registration Form");
+		//frame2 = new JFrame ("Registration Form");
 		frame = new JFrame("LoginForm");
-		frame.setSize(400, 300);
-		frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo (null);
-		frame2.setSize(600, 500);
-		frame2.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		frame2.setLocationRelativeTo (null);
+		setSize(400, 300);
+		setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo (null);
+		//frame2.setSize(600, 500);
+		//frame2.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		//frame2.setLocationRelativeTo (null);
         /*frame = new JFrame("Login Form");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
@@ -152,16 +152,18 @@ public class LoginFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = usernameField.getText();
+                String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-                if (validateLogin(username, password)) {
+                if (registerUser(username, password)) {
                     //messageLabel.setText("Login successful!");
-                    JOptionPane.showMessageDialog(frame, "Login successful!");
+                    JOptionPane.showMessageDialog(frame, "Registration successful!");
                     // Open main application window
-                } else {
-                	JOptionPane.showMessageDialog(frame, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+                    frame.dispose();
+                    //new MainApplicationFrame(username).setVisible(true);
+                }/* else {
+                	JOptionPane.showMessageDialog(frame, "Username already exists", "Error", JOptionPane.ERROR_MESSAGE);
                     //messageLabel.setText("Invalid username or password.");
-                }
+                }*/
             }
         });
         
@@ -177,6 +179,36 @@ public class LoginFrame extends JFrame {
         
        // add(panel);
     }
+	
+	private boolean registerUser(String username, String password) {
+
+	    if (username.isEmpty() || password.isEmpty()) {
+	        JOptionPane.showMessageDialog(frame, "Username and password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+
+	    if (isUsernameTaken(username)) {
+	        JOptionPane.showMessageDialog(frame, "Username already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+
+	    try (FileWriter writer = new FileWriter(username + ".csv", true);
+	         PrintWriter printWriter = new PrintWriter(writer)) {
+	        printWriter.println("Password," + password);
+	        printWriter.println("BankBalance,0");
+	        printWriter.println("PortfolioBalance,0");
+	        printWriter.println("Investments,0");
+	        return true;
+	    } catch (IOException e) {
+	        JOptionPane.showMessageDialog(frame, "Error creating user file.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return false;
+	    }
+	}
+
+	private boolean isUsernameTaken(String username) {
+	    File file = new File(username + ".csv");
+	    return file.exists(); // Simply check if the file exists
+	}
 
 	/*private boolean validateLogin(String username, String password) {
 		try (BufferedReader reader = new BufferedReader(new FileReader("clients.txt"))) {
@@ -193,7 +225,7 @@ public class LoginFrame extends JFrame {
         return false;
 	}*/
 	
-	private boolean registerUser(String username, String password) {
+	/*private boolean registerUser(String username, String password) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("clients.txt", true))) {
             if (validateLogin(username, password)) {
                 return false;
@@ -204,7 +236,71 @@ public class LoginFrame extends JFrame {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
+	
+	 /*private boolean registerUser(String username, String password) {
+		 
+		 boolean ok = true;
+		 
+	        if (username.isEmpty() || password.isEmpty()) {
+	            JOptionPane.showMessageDialog(frame, "Username and password cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+	            ok = false;
+	        }
+	        
+	        File file = new File (username + ".csv");
+	       Scanner input = null;
+	        try {
+				input = new Scanner (file);
+			} catch (FileNotFoundException e) {
+				ok = false;
+			}
+	        FileWriter write;
+	        PrintWriter writeFile = null;
+	        
+	        try {
+				write = new FileWriter (file, true);
+				writeFile = new PrintWriter (write);
+			} catch (IOException e) {
+				ok = false;
+			}
+	        
+	        if (isUsernameTaken(username)) {
+                ok = false;
+            }
+	        
+	        if (ok) {
+	        	writeFile.println(password);
+	        }
+	        
+	        input.close();
+	        writeFile.close();
+
+	       try (BufferedWriter writer = new BufferedWriter(new FileWriter("clients.csv", true))) {
+	            if (isUsernameTaken(username)) {
+	                return false;
+	            }
+	            writer.write(username + "," + password + "\n");
+	            return true;
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        return ok;
+	    }*/
+	 
+	 /*private boolean isUsernameTaken(String username) {
+	        try (Scanner scanner = new Scanner(new FileReader(username + ".csv"))) {
+	            while (scanner.hasNextLine()) {
+	                String line = scanner.nextLine();
+	                String[] parts = line.split(",");
+	                if (parts[0].equals(username)) {
+	                    return true;
+	                }
+	            }
+	        } catch (IOException e) {
+	            return false;
+	        }
+	        return false;
+	    }*/
 	
 	private boolean validateLogin(String username, String password) {
 		String nomeFile = username.trim() + ".csv";
@@ -223,6 +319,21 @@ public class LoginFrame extends JFrame {
 		}
         return ok;
     }
+	
+	/*private boolean validateLogin(String username, String password) {
+        try (Scanner scanner = new Scanner(new FileReader("clients.csv"))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                if (parts[0].equals(username) && parts[1].equals(password)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }*/
 
 
     /*private JPanel getJPanel() {

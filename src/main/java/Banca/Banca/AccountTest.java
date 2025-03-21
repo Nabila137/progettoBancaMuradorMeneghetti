@@ -1,4 +1,4 @@
-package Banca;
+package main.java.Banca;
 
 import static org.junit.jupiter.api.Assertions.*;
 

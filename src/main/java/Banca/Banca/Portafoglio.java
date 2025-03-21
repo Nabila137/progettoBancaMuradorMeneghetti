@@ -1,4 +1,4 @@
-package Banca;
+package main.java.Banca;
 
 public class Portafoglio {
 	

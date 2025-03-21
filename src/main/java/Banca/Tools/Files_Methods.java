@@ -1,6 +1,6 @@
-package Tools;
+package main.java.Tools;
 
-import Banca.Utente;
+import main.java.Banca.Utente;
 import java.io.*;
 import java.util.Scanner;
 import java.util.Vector;
