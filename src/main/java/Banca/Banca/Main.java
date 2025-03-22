@@ -1,10 +1,13 @@
 package main.java.Banca;
 
+import java.time.LocalDate;
+
 public class Main {
 	
-	static Portafoglio p;
 	public static void main(String[] args) {
-        new LoginFrame();
+		Utente utente = null;
+		Bank bank = new Bank("banca", utente);
+        new LoginFrame(bank);
     }
 
 }

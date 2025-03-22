@@ -1,9 +1,12 @@
 package main.java.Tools;
 
+import main.java.Banca.MainApplicationFrame;
 import main.java.Banca.Utente;
 import java.io.*;
 import java.util.Scanner;
 import java.util.Vector;
+
+import javax.swing.JOptionPane;
 
 public class Files_Methods {
 	
@@ -59,6 +62,44 @@ public class Files_Methods {
 		
 	}*/
 	
+	public static String getPartOfString (String username, String nomeField) {
+		
+		String nomeFile = username + ".csv";
+		String line = null;
+		
+		try (FileReader file= new FileReader (nomeFile); 
+			Scanner input = new Scanner (file);) {
+			
+			while (input.hasNextLine()) {
+    			String riga = input.nextLine();
+    			if (riga.trim().startsWith(nomeField.trim())) {
+    				String s[] = riga.split(",");
+    				line = s[1];
+    			}
+    		}
+			
+			input.close();
+            
+		} catch (IOException e) {
+   	        return null;
+   	    }
+		return line;
+	}
+	
+	/*public static boolean parsingToDouble (String s) {
+		
+		double amount = ;
+		boolean ok = true;
+		
+		try {
+			amount = Double.parseDouble(s);
+		} catch (NumberFormatException ex) {
+			ok = false;
+		}
+		return ok;
+		
+	}*/
+	
 	public static void main (String [] args) {
 		String fnome="clients.csv";
 		//String fnome="C:\\Nabila\\A.s. 2024-25\\Informatica\\Java\\Banca_Menedor\\clients.csv";
@@ -83,6 +124,8 @@ public class Files_Methods {
 		System.out.println(System.getProperty("user.dir"));
 		
 	}
+	
+	
 	
 	//isStringPresentInFile ("Password", )
 }

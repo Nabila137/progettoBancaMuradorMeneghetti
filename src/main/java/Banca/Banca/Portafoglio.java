@@ -12,6 +12,10 @@ public class Portafoglio {
 		return soldi;
 	}
 	
+	public void setSoldi (double soldi) {
+		this.soldi  = soldi;
+	}
+	
 	public void addSoldi (double quantita) {
 		soldi +=quantita;
 	}

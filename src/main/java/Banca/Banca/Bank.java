@@ -1,78 +1,36 @@
 package main.java.Banca;
 
 import java.util.Vector;
-import main.java.Tools.*;
+import java.time.LocalDate;
 
 public class Bank {
-	
-	//private Vector <Utente> utenti;;
+
 	private String nome;
 	private Utente utente;
 	private double contoBancario;
-	private int numInvestimenti;
-	//private final String countryCode = "IT";
-	//private int chackDigit = CommonMethods.randomNumberUnsigned(2);
-	//private char nationalCheckDigit = 'X';
-	//private int bankCode;
-	/*try {
-		number = (int) Integer.parseInt(Random.randomNumber(5));
-	} catch (NumberFormatException e) {
-		
-	}*/
-	//private String s = "";
-	//private String branchCode;// = Random.randomString(5);
+	private LocalDate initialDate;
+	private Vector <Investment> investments;
 	
-	public Bank (String nome, Utente utente/*int bankCode, String branchCode*/) {
+	
+	public Bank (String nome, Utente utente) {
 		
-		// new Vector <Utente> (10, 5);
 		 this.nome = nome;
 		 this.utente = utente;
-		 //this.bankCode = bankCode;
-		 //this.branchCode = branchCode;
+		 investments = new Vector <Investment> (3, 2);
 		 
 	}
 	
 	public String getNome () {
 		return nome;
 	}
-	
-	
 
-	/*public Vector<Utente> getUtenti() {
-		return utenti;
-	}
-
-	public String getCountryCode() {
-		return countryCode;
-	}
-
-	public int getChackDigit() {
-		return chackDigit;
-	}
-
-	public char getNationalCheckDigit() {
-		return nationalCheckDigit;
-	}
-
-	public int getBankCode() {
-		return bankCode;
-	}
-
-	public String getBranchCode() {
-		return branchCode;
-	}
-
-	public void setUtenti(Vector<Utente> utenti) {
-		this.utenti = utenti;
-	}*/
-
-	public int getNumInvestimenti() {
+	/*public int getNumInvestimenti() {
 		return numInvestimenti;
 	}
 
 	public void setNumInvestimenti(int numInvestimenti) {
 		this.numInvestimenti = numInvestimenti;
-	}
+	}*/
 
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -85,29 +43,74 @@ public class Bank {
 	public void setContoBancario(double soldi) {
 		contoBancario += soldi;
 	}
-
-	/*public void setBankCode(int bankCode) {
-		this.bankCode = bankCode;
+	
+	public Utente getUtente() {
+		return utente;
 	}
 
-	public void setBranchCode(String branchCode) {
-		this.branchCode = branchCode;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+	public LocalDate getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(LocalDate initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public Vector <Investment> getInvestments() {
+		return investments;
 	}
 	
-	/*public void meseSuccessivo () {
+	public void addInvestimento (Investment x) {
+		investments.add(x);
+	}
+	
+	public void removeInvestment (Investment x) {
+		investments.remove(x);
+	}
+
+	public void setInvestments(Vector<Investment> investments) {
+		this.investments = investments;
+	}
+	
+	//"initialDate" è la data della registrazione. Così ho un tempo di inizio che verrà memorizzato nel file che mi serve per gestire e riprendere la durata dell'investimento
+	
+	public void nextMonth (int months) {
+	
+		utente.getPortafoglio().addSoldi(utente.getSalary());
+        
+    }
+	
+	/*public boolean canLookForReturns () {
 		
 	}*/
-
-	/*@Override
-	public String toString() {
-		return "Bank [utenti=" + utenti + ", nome=" + nome + ", countryCode=" + countryCode + ", chackDigit="
-				+ chackDigit + ", nationalCheckDigit=" + nationalCheckDigit + ", bankCode=" + bankCode + ", branchCode="
-				+ branchCode + "]";
-	}*/
 	
+	public Investment[] lookForReturns (LocalDate initialDate) {
+		
+		int size = investments.size();
+		Investment[] returns = new Investment [size];
+		System.out.println(returns);
+		
+		if (size > 0 ) {
+			for (int i = 0; i < size; i++) {
+				if (initialDate.isAfter (investments.get(i).getEndDate()) || initialDate.isEqual(investments.get(i).getEndDate())){
+					returns[i] = investments.get(i);
+					
+					investments.remove(i);
+				}
+			}
+		} else {
+			return null;
+		}
+		
+		return returns;
+	}
+
 	public void deposit(double depositMoney) {
 		
-		//if (Deposit_Withdraw.canDeposit(utente.getPortafoglio().getSoldi(), balance, depositMoney))
 		utente.getPortafoglio().togliSoldi(depositMoney);
 		contoBancario += depositMoney;
 		
@@ -116,27 +119,28 @@ public class Bank {
 	public void withdraw(double withdrawal) {
 		
 		withdrawal *= -1;
-		//if (Deposit_Withdraw.canWithdraw(utente.getPortafoglio().getSoldi(), balance, withdrawal))
 		utente.getPortafoglio().togliSoldi(withdrawal);
 		contoBancario += withdrawal;
 		
 	}
 	
-	public double ricavo (int percentualeSuccesso, int rischio, double investimento, double guadagno) {
+	/*public double ricavo (int percentualeSuccesso, int rischio, double investimento, double guadagno) {
 		
-		//int percentualeRandom = (int)(Math.random() * 100 + 1);
 		double ritorno = -1;
 		double successRate = percentualeSuccesso/100;
-		double successLoss = investimento * successRate * guadagno; 
+		double gainLose = investimento * successRate * guadagno; 
 		if ((percentualeSuccesso <= 100) && (percentualeSuccesso >= 0) && (rischio <= 100) && (rischio > 0) && (investimento > 0)) {
 			if (percentualeSuccesso >= rischio) {
-				ritorno = investimento  + successLoss;
+				ritorno = investimento  + gainLose;
 			} else {
-				ritorno = investimento  - successLoss;			}
+				ritorno = investimento  - gainLose;			}
 		}
 		
 		return ritorno;
-	}
+	}*/
 	
+	/*public static void main(String[] args) {
+		Investment[] x = lookForReturns (LocalDate.now(), 5);
+	}*/
 
 }
