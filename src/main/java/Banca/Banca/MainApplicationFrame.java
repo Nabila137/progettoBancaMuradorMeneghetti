@@ -337,11 +337,6 @@ public class MainApplicationFrame extends JFrame {
 	
 	public void investmentFrame() {
 		
-		/*int rischio = 0;
-		int durata = 0;
-		LocalDate startDate = LocalDate.now();
-		double guadagno = 0;*/
-		
 	    JFrame durationFrame = new JFrame("Duration");
 	    durationFrame.setSize(400, 300);
 	    durationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
