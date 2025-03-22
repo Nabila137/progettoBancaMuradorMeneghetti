@@ -88,23 +88,21 @@ public class MainApplicationFrame extends JFrame {
 					if (ok) {
 						if (Deposit_Withdraw.canDeposit(portafoglio, contoBancario, amount)) {
 							bank.deposit(amount);
-							similarCode (bank, amount, "Deposit", "deposited");
-							/*portafoglio = bank.getUtente().getPortafoglio().getSoldi();
-							contoBancario = bank.getContoBancario();
-							String s = "" + contoBancario;
-							String s1 = "" + portafoglio;
-							if (sostituzioneStringa(username, s, "contoBancario")
-									&& sostituzioneStringa(username, s1, "portafoglio")) {
-								JOptionPane.showMessageDialog(MainApplicationFrame.this, "Deposit successful!",
-										"Success", JOptionPane.INFORMATION_MESSAGE);
-								addHistory("Successfully deposited: " + amount);
-								//addHistory("Conto Bancario: " + contoBancario);
-								//addHistory("Portafoglio: " + portafoglio);
-							} else {
-								JOptionPane.showMessageDialog(MainApplicationFrame.this, "Error updating balances.",
-										"Error", JOptionPane.ERROR_MESSAGE);
-								addHistory("Couldn't update balances");
-							}*/
+							similarCode(bank, amount, "Deposit", "deposited");
+							/*
+							 * portafoglio = bank.getUtente().getPortafoglio().getSoldi(); contoBancario =
+							 * bank.getContoBancario(); String s = "" + contoBancario; String s1 = "" +
+							 * portafoglio; if (sostituzioneStringa(username, s, "contoBancario") &&
+							 * sostituzioneStringa(username, s1, "portafoglio")) {
+							 * JOptionPane.showMessageDialog(MainApplicationFrame.this,
+							 * "Deposit successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+							 * addHistory("Successfully deposited: " + amount);
+							 * //addHistory("Conto Bancario: " + contoBancario);
+							 * //addHistory("Portafoglio: " + portafoglio); } else {
+							 * JOptionPane.showMessageDialog(MainApplicationFrame.this,
+							 * "Error updating balances.", "Error", JOptionPane.ERROR_MESSAGE);
+							 * addHistory("Couldn't update balances"); }
+							 */
 						} else {
 							JOptionPane.showMessageDialog(MainApplicationFrame.this, "Can't deposit.", "Error",
 									JOptionPane.ERROR_MESSAGE);
@@ -141,23 +139,21 @@ public class MainApplicationFrame extends JFrame {
 					if (ok) {
 						if (Deposit_Withdraw.canWithdraw(portafoglio, contoBancario, amount)) {
 							bank.withdraw(amount);
-							similarCode (bank, amount, "Whithdraw", "withdrawn");
-							/*portafoglio = bank.getUtente().getPortafoglio().getSoldi();
-							contoBancario = bank.getContoBancario();
-							String s = "" + contoBancario;
-							String s1 = "" + portafoglio;
-							if (sostituzioneStringa(username, s, "contoBancario")
-									&& sostituzioneStringa(username, s1, "portafoglio")) {
-								JOptionPane.showMessageDialog(MainApplicationFrame.this, "Withdraw successful!",
-										"Success", JOptionPane.INFORMATION_MESSAGE);
-								addHistory("Successfully withdrawn: " + amount);
-								addHistory("Conto Bancario: " + contoBancario);
-								addHistory("Portafoglio: " + portafoglio);
-							} else {
-								JOptionPane.showMessageDialog(MainApplicationFrame.this, "Error updating balances.",
-										"Error", JOptionPane.ERROR_MESSAGE);
-								addHistory("Couldn't update balances");
-							}*/
+							similarCode(bank, amount, "Whithdraw", "withdrawn");
+							/*
+							 * portafoglio = bank.getUtente().getPortafoglio().getSoldi(); contoBancario =
+							 * bank.getContoBancario(); String s = "" + contoBancario; String s1 = "" +
+							 * portafoglio; if (sostituzioneStringa(username, s, "contoBancario") &&
+							 * sostituzioneStringa(username, s1, "portafoglio")) {
+							 * JOptionPane.showMessageDialog(MainApplicationFrame.this,
+							 * "Withdraw successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+							 * addHistory("Successfully withdrawn: " + amount);
+							 * addHistory("Conto Bancario: " + contoBancario); addHistory("Portafoglio: " +
+							 * portafoglio); } else {
+							 * JOptionPane.showMessageDialog(MainApplicationFrame.this,
+							 * "Error updating balances.", "Error", JOptionPane.ERROR_MESSAGE);
+							 * addHistory("Couldn't update balances"); }
+							 */
 						} else {
 							JOptionPane.showMessageDialog(MainApplicationFrame.this, "Can't withdraw.", "Error",
 									JOptionPane.ERROR_MESSAGE);
@@ -173,7 +169,7 @@ public class MainApplicationFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showBalance("portafoglio");
-				
+
 			}
 		});
 
@@ -201,22 +197,24 @@ public class MainApplicationFrame extends JFrame {
 					if (ok) {
 						if (months > 0) {
 							bank.nextMonth(months);
-							
+
 							Investment[] returns = bank.lookForReturns(initialDate);
 							int length = returns.length;
 							if (returns != null && length > 0) {
-								for (int i=0; i< length; i++) {
+								for (int i = 0; i < length; i++) {
 									double ritorno = returns[i].getRitorno();
 									bank.setContoBancario(bank.getContoBancario() + ritorno);
 									double soldiBanca = bank.getContoBancario();
 									if (soldiBanca < 0) {
 										bank.getUtente().getPortafoglio().togliSoldi(soldiBanca * -1);
-										bank.setContoBancario (0);
-										updateBalance ("contoBancario", bank.getContoBancario());
-										/*if ((bank.getUtente().getPortafoglio().getSoldi() + soldiBanca) < 0) {
-											bank.setContoBancario(soldiBanca + bank.getUtente().getPortafoglio().getSoldi());
-											bank.getUtente().getPortafoglio().setSoldi(0);
-										}*/
+										bank.setContoBancario(0);
+										updateBalance("contoBancario", bank.getContoBancario());
+										/*
+										 * if ((bank.getUtente().getPortafoglio().getSoldi() + soldiBanca) < 0) {
+										 * bank.setContoBancario(soldiBanca +
+										 * bank.getUtente().getPortafoglio().getSoldi());
+										 * bank.getUtente().getPortafoglio().setSoldi(0); }
+										 */
 									}
 								}
 								int choice = JOptionPane.showConfirmDialog(MainApplicationFrame.this,
@@ -224,10 +222,10 @@ public class MainApplicationFrame extends JFrame {
 										JOptionPane.YES_NO_OPTION);
 								if (choice == JOptionPane.YES_OPTION) {
 									showInvestmentReturns(returns);
-		                        }
-								updateInvestments (bank);
+								}
+								updateInvestments(bank);
 							}
-							updateBalance ("portafoglio", bank.getUtente().getPortafoglio().getSoldi());
+							updateBalance("portafoglio", bank.getUtente().getPortafoglio().getSoldi());
 							// Modify LocalDate
 						} else {
 							JOptionPane.showMessageDialog(MainApplicationFrame.this, "Data must be greater than 0.",
@@ -251,47 +249,47 @@ public class MainApplicationFrame extends JFrame {
 					try {
 						amount = Double.parseDouble(amountStr);
 						bank.setContoBancario(bank.getContoBancario() - amount);
-						investmentFrame ();
-						Investment x = new Investment (amount, rischio, durata, LocalDate.now(), guadagno);
+						investmentFrame();
+						Investment x = new Investment(amount, rischio, durata, LocalDate.now(), guadagno);
 						bank.addInvestimento(x);
-						JOptionPane.showMessageDialog(MainApplicationFrame.this, "Investment successful!","Success", JOptionPane.INFORMATION_MESSAGE);
-						
+						JOptionPane.showMessageDialog(MainApplicationFrame.this, "Investment successful!", "Success",
+								JOptionPane.INFORMATION_MESSAGE);
+
 					} catch (NumberFormatException ex) {
 						JOptionPane.showMessageDialog(MainApplicationFrame.this,
 								"Invalid amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
 						addHistory("Entered invalid amount.");
 					}
 				}
-				//addHistory("Invest clicked.");
+				// addHistory("Invest clicked.");
 			}
 		});
 
 		add(panel);
 	}
-	
-	private void similarCode (Bank bank, double amount, String x, String y) {
-		
+
+	private void similarCode(Bank bank, double amount, String x, String y) {
+
 		portafoglio = bank.getUtente().getPortafoglio().getSoldi();
 		contoBancario = bank.getContoBancario();
 		String s = "" + contoBancario;
 		String s1 = "" + portafoglio;
-		if (sostituzioneStringa(username, s, "contoBancario")
-				&& sostituzioneStringa(username, s1, "portafoglio")) {
-			JOptionPane.showMessageDialog(MainApplicationFrame.this, x + "successful!",
-					"Success", JOptionPane.INFORMATION_MESSAGE);
+		if (sostituzioneStringa(username, s, "contoBancario") && sostituzioneStringa(username, s1, "portafoglio")) {
+			JOptionPane.showMessageDialog(MainApplicationFrame.this, x + "successful!", "Success",
+					JOptionPane.INFORMATION_MESSAGE);
 			addHistory("Successfully" + y + ": " + amount);
-			//addHistory("Conto Bancario: " + contoBancario);
-			//addHistory("Portafoglio: " + portafoglio);
+			// addHistory("Conto Bancario: " + contoBancario);
+			// addHistory("Portafoglio: " + portafoglio);
 		} else {
-			JOptionPane.showMessageDialog(MainApplicationFrame.this, "Error updating balances.",
-					"Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(MainApplicationFrame.this, "Error updating balances.", "Error",
+					JOptionPane.ERROR_MESSAGE);
 			addHistory("Couldn't update balances");
 		}
-		
+
 	}
-	
-	public boolean updateInvestments (Bank bank) {
-		//sostituzioneStringa ()
+
+	public boolean updateInvestments(Bank bank) {
+		// sostituzioneStringa ()
 		String nomeFile = bank.getUtente().getNomeUtente() + ".csv";
 		File temp = new File("temporaneo.csv");
 
@@ -305,11 +303,16 @@ public class MainApplicationFrame extends JFrame {
 				if (riga.trim().startsWith("investments")) {
 					String s[] = riga.split(",");
 					int n = Integer.parseInt(s[1]);
-					printWriter.println("investments,"+bank.getInvestments().size());
+					printWriter.println("investments," + bank.getInvestments().size());
 					for (int i = 0; i < n; i++) {
-						printWriter.println(""+bank.getInvestments().get(i).getAmount() + "," + bank.getInvestments().get(i).getRischio() + "," +bank.getInvestments().get(i).getDurata() + ","+bank.getInvestments().get(i).getStartDate()+","+bank.getInvestments().get(i).getGuadagno()+ "," +bank.getInvestments().get(i).getRitorno());
+						printWriter.println("" + bank.getInvestments().get(i).getAmount() + ","
+								+ bank.getInvestments().get(i).getRischio() + ","
+								+ bank.getInvestments().get(i).getDurata() + ","
+								+ bank.getInvestments().get(i).getStartDate() + ","
+								+ bank.getInvestments().get(i).getGuadagno() + ","
+								+ bank.getInvestments().get(i).getRitorno());
 					}
-					
+
 				}
 				printWriter.println(riga);
 			}
@@ -334,182 +337,190 @@ public class MainApplicationFrame extends JFrame {
 			return false;
 		}
 	}
-	
+
 	public void investmentFrame() {
-		
-	    JFrame durationFrame = new JFrame("Duration");
-	    durationFrame.setSize(400, 300);
-	    durationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    durationFrame.setLocationRelativeTo(this);
 
-	    JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
-	    panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		JFrame durationFrame = new JFrame("Duration");
+		durationFrame.setSize(400, 300);
+		durationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		durationFrame.setLocationRelativeTo(this);
 
-	    JLabel titleLabel = new JLabel("Select Duration:", SwingConstants.CENTER);
-	    titleLabel.setFont(titleLabel.getFont().deriveFont(16.0f));
-	    panel.add(titleLabel);
+		JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-	    JButton lungoButton = new JButton("Lungo (9 months)");
-	    JButton medioButton = new JButton("Medio (5 months)");
-	    JButton cortoButton = new JButton("Corto (2 months)");
-	    
-	    int lungo = 9, medio = 5, corto = 2;
+		JLabel titleLabel = new JLabel("Select Duration:", SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(16.0f));
+		panel.add(titleLabel);
 
-	    panel.add(lungoButton);
-	    panel.add(medioButton);
-	    panel.add(cortoButton);
+		JButton lungoButton = new JButton("Lungo (9 months)");
+		JButton medioButton = new JButton("Medio (5 months)");
+		JButton cortoButton = new JButton("Corto (2 months)");
 
-	    // Action Listeners for Duration Buttons
-	    lungoButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	durata = lungo;
-	            durationFrame.dispose();
-	            showRiskLevelSelectionFrame(); // Pass the selected duration (12 months)
-	        }
-	        
-	    });
+		int lungo = 9, medio = 5, corto = 2;
 
-	    medioButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	durata = medio;
-	            durationFrame.dispose();
-	            showRiskLevelSelectionFrame(); // Pass the selected duration (6 months)
-	        }
-	    });
+		panel.add(lungoButton);
+		panel.add(medioButton);
+		panel.add(cortoButton);
 
-	    cortoButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	durata = corto;
-	            durationFrame.dispose();
-	            showRiskLevelSelectionFrame(); // Pass the selected duration (3 months)
-	        }
-	    });
+		// Action Listeners for Duration Buttons
+		lungoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				durata = lungo;
+				durationFrame.dispose();
+				showRiskLevelSelectionFrame(); // Pass the selected duration (12 months)
+			}
 
-	    durationFrame.add(panel);
-	    durationFrame.setVisible(true);
+		});
+
+		medioButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				durata = medio;
+				durationFrame.dispose();
+				showRiskLevelSelectionFrame(); // Pass the selected duration (6 months)
+			}
+		});
+
+		cortoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				durata = corto;
+				durationFrame.dispose();
+				showRiskLevelSelectionFrame(); // Pass the selected duration (3 months)
+			}
+		});
+
+		durationFrame.add(panel);
+		durationFrame.setVisible(true);
 	}
-	
+
 	private void showRiskLevelSelectionFrame() {
-	    JFrame riskFrame = new JFrame("Risk Levels");
-	    riskFrame.setSize(400, 300);
-	    riskFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    riskFrame.setLocationRelativeTo(this);
+		JFrame riskFrame = new JFrame("Risk Levels");
+		riskFrame.setSize(400, 300);
+		riskFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		riskFrame.setLocationRelativeTo(this);
 
-	    JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
-	    panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-	    JLabel titleLabel = new JLabel("Select Risk Level:", SwingConstants.CENTER);
-	    titleLabel.setFont(titleLabel.getFont().deriveFont(16.0f));
-	    panel.add(titleLabel);
+		JLabel titleLabel = new JLabel("Select Risk Level:", SwingConstants.CENTER);
+		titleLabel.setFont(titleLabel.getFont().deriveFont(16.0f));
+		panel.add(titleLabel);
 
-	    JButton altoButton = new JButton("Alto (85%) - 10% Gain");
-	    JButton medioButton = new JButton("Medio (50%) - 5% Gain");
-	    JButton bassoButton = new JButton("Basso (10%) - 2% Gain");
+		JButton altoButton = new JButton("Alto (85%) - 10% Gain");
+		JButton medioButton = new JButton("Medio (50%) - 5% Gain");
+		JButton bassoButton = new JButton("Basso (10%) - 2% Gain");
 
-	    panel.add(altoButton);
-	    panel.add(medioButton);
-	    panel.add(bassoButton);
-	    
-	    int alto = 85, medium = 50, basso = 10;
-	    double high = 1.5, med = 0.7, low = 0.3;
+		panel.add(altoButton);
+		panel.add(medioButton);
+		panel.add(bassoButton);
 
-	    // Action Listeners for Risk Level Buttons
-	    altoButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	rischio = alto;
-	        	guadagno = high;
-	            //saveInvestment(durationMonths, "Alto", 0.10); // Save investment with high risk
-	            riskFrame.dispose();
-	        }
-	    });
+		int alto = 85, medium = 50, basso = 10;
+		double high = 1.5, med = 0.7, low = 0.3;
 
-	    medioButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	rischio = medium;
-	        	guadagno = med;
-	            //saveInvestment(durationMonths, "Medio", 0.05); // Save investment with medium risk
-	            riskFrame.dispose();
-	        }
-	    });
+		// Action Listeners for Risk Level Buttons
+		altoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rischio = alto;
+				guadagno = high;
+				// saveInvestment(durationMonths, "Alto", 0.10); // Save investment with high
+				// risk
+				riskFrame.dispose();
+			}
+		});
 
-	    bassoButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	rischio = basso;
-	        	guadagno = low;
-	            //saveInvestment(durationMonths, "Basso", 0.02); // Save investment with low risk
-	            riskFrame.dispose();
-	        }
-	    });
+		medioButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rischio = medium;
+				guadagno = med;
+				// saveInvestment(durationMonths, "Medio", 0.05); // Save investment with medium
+				// risk
+				riskFrame.dispose();
+			}
+		});
 
-	    riskFrame.add(panel);
-	    riskFrame.setVisible(true);
+		bassoButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rischio = basso;
+				guadagno = low;
+				// saveInvestment(durationMonths, "Basso", 0.02); // Save investment with low
+				// risk
+				riskFrame.dispose();
+			}
+		});
+
+		riskFrame.add(panel);
+		riskFrame.setVisible(true);
 	}
-	
-	/*private void aggiornaInvestmetBank (double amount, int rischio, double guadagno) {
-		
-		
-	}*/
-	
-	/*private void saveInvestment(int durationMonths, String riskLevel, double gainRate) {
-	    LocalDate startDate = LocalDate.now(); // Get the current date
-	    String fileName = username + ".csv";
 
-	    try (FileWriter writer = new FileWriter(fileName, true);
-	         PrintWriter printWriter = new PrintWriter(writer)) {
-	        // Save the investment details
-	        printWriter.println("Investment");
-	        printWriter.println("Duration: " + durationMonths + " months");
-	        printWriter.println("Risk Level: " + riskLevel);
-	        printWriter.println("Gain Rate: " + gainRate);
-	        printWriter.println("Start Date: " + startDate);
-	        printWriter.println("----------------------------");
+	/*
+	 * private void aggiornaInvestmetBank (double amount, int rischio, double
+	 * guadagno) {
+	 * 
+	 * 
+	 * }
+	 */
 
-	        JOptionPane.showMessageDialog(this, "Investment saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-	    } catch (IOException e) {
-	        JOptionPane.showMessageDialog(this, "Error saving investment.", "Error", JOptionPane.ERROR_MESSAGE);
-	    }
-	}*/
+	/*
+	 * private void saveInvestment(int durationMonths, String riskLevel, double
+	 * gainRate) { LocalDate startDate = LocalDate.now(); // Get the current date
+	 * String fileName = username + ".csv";
+	 * 
+	 * try (FileWriter writer = new FileWriter(fileName, true); PrintWriter
+	 * printWriter = new PrintWriter(writer)) { // Save the investment details
+	 * printWriter.println("Investment"); printWriter.println("Duration: " +
+	 * durationMonths + " months"); printWriter.println("Risk Level: " + riskLevel);
+	 * printWriter.println("Gain Rate: " + gainRate);
+	 * printWriter.println("Start Date: " + startDate);
+	 * printWriter.println("----------------------------");
+	 * 
+	 * JOptionPane.showMessageDialog(this, "Investment saved successfully!",
+	 * "Success", JOptionPane.INFORMATION_MESSAGE); } catch (IOException e) {
+	 * JOptionPane.showMessageDialog(this, "Error saving investment.", "Error",
+	 * JOptionPane.ERROR_MESSAGE); } }
+	 */
 
 	private void showInvestmentReturns(Investment[] returns) {
-	    JFrame returnsFrame = new JFrame("Investment Returns");
-	    returnsFrame.setSize(400, 300);
-	    returnsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    returnsFrame.setLocationRelativeTo(this);
+		JFrame returnsFrame = new JFrame("Investment Returns");
+		returnsFrame.setSize(400, 300);
+		returnsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		returnsFrame.setLocationRelativeTo(this);
 
-	    JPanel panel = new JPanel(new BorderLayout());
-	    JTextArea textArea = new JTextArea();
-	    textArea.setEditable(false);
+		JPanel panel = new JPanel(new BorderLayout());
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 
-	    // Add investment details to the text area
-	    StringBuilder sb = new StringBuilder();
-	    for (Investment investment : returns) {
-	        sb.append("Amount: ").append(investment.getAmount()).append("\n");
-	        sb.append("Risk Level: ").append(investment.getRischio()).append("\n");
-	        sb.append("Duration: ").append(investment.getDurata()).append("\n");
-	        sb.append("Return: ").append(investment.getRitorno()).append("\n");
-	        sb.append("----------------------------\n");
-	    }
-	    textArea.setText(sb.toString());
+		// Add investment details to the text area
+		StringBuilder sb = new StringBuilder();
+		for (Investment investment : returns) {
+			sb.append("Amount: ").append(investment.getAmount()).append("\n");
+			sb.append("Risk Level: ").append(investment.getRischio()).append("\n");
+			sb.append("Duration: ").append(investment.getDurata()).append("\n");
+			sb.append("Return: ").append(investment.getRitorno()).append("\n");
+			sb.append("----------------------------\n");
+		}
+		textArea.setText(sb.toString());
 
-	    JScrollPane scrollPane = new JScrollPane(textArea);
-	    panel.add(scrollPane, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		panel.add(scrollPane, BorderLayout.CENTER);
 
-	    returnsFrame.add(panel);
-	    returnsFrame.setVisible(true);
+		returnsFrame.add(panel);
+		returnsFrame.setVisible(true);
 	}
 
 	private void loadHistory() {
 		try (BufferedReader reader = new BufferedReader(new FileReader(username + ".csv"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				if (!line.startsWith("password") /*&& !line.startsWith("contoBancario") && !line.startsWith("portafoglio")
-						&& !line.startsWith("investimenti")*/) {
+				if (!line
+						.startsWith("password") /*
+												 * && !line.startsWith("contoBancario") &&
+												 * !line.startsWith("portafoglio") && !line.startsWith("investimenti")
+												 */) {
 					historyArea.append(line + "\n");
 				}
 			}

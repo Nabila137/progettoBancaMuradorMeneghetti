@@ -1,20 +1,20 @@
 package main.java.Banca;
 
 public class Utente {
-	
+
 	private String nomeUtente;
 	private String password;
 	private Portafoglio portafoglio;
 	private int cont = 0;
 	private double salary;
-	
-	public Utente (String nomeUtente, String password, Portafoglio portafoglio, double salary) {
-		
+
+	public Utente(String nomeUtente, String password, Portafoglio portafoglio, double salary) {
+
 		this.nomeUtente = nomeUtente;
 		this.password = password;
 		this.portafoglio = portafoglio;
 		this.salary = salary;
-		
+
 	}
 
 	public double getSalary() {
@@ -32,7 +32,7 @@ public class Utente {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public Portafoglio getPortafoglio() {
 		return portafoglio;
 	}
