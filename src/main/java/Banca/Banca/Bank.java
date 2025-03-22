@@ -5,34 +5,40 @@ import main.java.Tools.*;
 
 public class Bank {
 	
-	private Vector <Utente> utenti;;
+	//private Vector <Utente> utenti;;
 	private String nome;
-	private final String countryCode = "IT";
-	private int chackDigit = CommonMethods.randomNumberUnsigned(2);
-	private char nationalCheckDigit = 'X';
-	private int bankCode;
+	private Utente utente;
+	private double contoBancario;
+	private int numInvestimenti;
+	//private final String countryCode = "IT";
+	//private int chackDigit = CommonMethods.randomNumberUnsigned(2);
+	//private char nationalCheckDigit = 'X';
+	//private int bankCode;
 	/*try {
 		number = (int) Integer.parseInt(Random.randomNumber(5));
 	} catch (NumberFormatException e) {
 		
 	}*/
-	private String s = "";
-	private String branchCode;// = Random.randomString(5);
+	//private String s = "";
+	//private String branchCode;// = Random.randomString(5);
 	
-	public Bank (String nome, int bankCode, String branchCode) {
+	public Bank (String nome, Utente utente/*int bankCode, String branchCode*/) {
 		
-		 new Vector <Utente> (10, 5);
+		// new Vector <Utente> (10, 5);
 		 this.nome = nome;
-		 this.bankCode = bankCode;
-		 this.branchCode = branchCode;
+		 this.utente = utente;
+		 //this.bankCode = bankCode;
+		 //this.branchCode = branchCode;
 		 
 	}
 	
 	public String getNome () {
 		return nome;
 	}
+	
+	
 
-	public Vector<Utente> getUtenti() {
+	/*public Vector<Utente> getUtenti() {
 		return utenti;
 	}
 
@@ -58,13 +64,29 @@ public class Bank {
 
 	public void setUtenti(Vector<Utente> utenti) {
 		this.utenti = utenti;
+	}*/
+
+	public int getNumInvestimenti() {
+		return numInvestimenti;
+	}
+
+	public void setNumInvestimenti(int numInvestimenti) {
+		this.numInvestimenti = numInvestimenti;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public double getContoBancario() {
+		return contoBancario;
+	}
+	
+	public void setContoBancario(double soldi) {
+		contoBancario += soldi;
+	}
 
-	public void setBankCode(int bankCode) {
+	/*public void setBankCode(int bankCode) {
 		this.bankCode = bankCode;
 	}
 
@@ -76,14 +98,45 @@ public class Bank {
 		
 	}*/
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Bank [utenti=" + utenti + ", nome=" + nome + ", countryCode=" + countryCode + ", chackDigit="
 				+ chackDigit + ", nationalCheckDigit=" + nationalCheckDigit + ", bankCode=" + bankCode + ", branchCode="
 				+ branchCode + "]";
+	}*/
+	
+	public void deposit(double depositMoney) {
+		
+		//if (Deposit_Withdraw.canDeposit(utente.getPortafoglio().getSoldi(), balance, depositMoney))
+		utente.getPortafoglio().togliSoldi(depositMoney);
+		contoBancario += depositMoney;
+		
 	}
 	
+	public void withdraw(double withdrawal) {
+		
+		withdrawal *= -1;
+		//if (Deposit_Withdraw.canWithdraw(utente.getPortafoglio().getSoldi(), balance, withdrawal))
+		utente.getPortafoglio().togliSoldi(withdrawal);
+		contoBancario += withdrawal;
+		
+	}
 	
+	public double ricavo (int percentualeSuccesso, int rischio, double investimento, double guadagno) {
+		
+		//int percentualeRandom = (int)(Math.random() * 100 + 1);
+		double ritorno = -1;
+		double successRate = percentualeSuccesso/100;
+		double successLoss = investimento * successRate * guadagno; 
+		if ((percentualeSuccesso <= 100) && (percentualeSuccesso >= 0) && (rischio <= 100) && (rischio > 0) && (investimento > 0)) {
+			if (percentualeSuccesso >= rischio) {
+				ritorno = investimento  + successLoss;
+			} else {
+				ritorno = investimento  - successLoss;			}
+		}
+		
+		return ritorno;
+	}
 	
 
 }
