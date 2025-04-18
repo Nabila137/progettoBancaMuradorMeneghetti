@@ -312,9 +312,9 @@ public class Methods {
       for (int i = 0; i < length; i++) {
         if (investments[i] != null) {
           ok = true;
+          info += "\n\n";
           info += "Investment__" + (i + 1) + "__\n";
           info += investments[i].toString();
-          info += "\n\n";
         }
       }
       if (ok) {

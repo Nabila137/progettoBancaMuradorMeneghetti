@@ -63,7 +63,7 @@ public class Utente {
 
   public void nextMonth(int months) {
 
-    aggiungiSoldi(getSalary());
+    aggiungiSoldi(getSalary() * months);
     account.setInitialDate(account.getInitialDate().plusMonths(months));
     // here I have to change the initial date
     // Initial date is the moment you create the account and it will change whenever you click on

@@ -54,6 +54,8 @@ public class Investment {
       } else {
         ritorno = investimento - gainLose;
       }
+
+      ritorno = Math.round(ritorno * 100.0) / 100.0;
     }
 
     return ritorno;

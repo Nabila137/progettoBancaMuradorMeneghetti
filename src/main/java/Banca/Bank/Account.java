@@ -119,8 +119,6 @@ public class Account {
     }
 
     if (cont > 0) {
-      System.out.println("Contatore è maggiore di 0");
-      System.out.println(cont);
       return returns;
     } else {
       return null;

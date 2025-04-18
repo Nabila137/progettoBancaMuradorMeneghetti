@@ -135,11 +135,7 @@ public class InvestmentsPanel extends JPanel {
               setBackground(row % 2 == 0 ? ROW_COLOR : ALT_ROW_COLOR);
             }
 
-            if (column == 1 || column == 4) {
-              setHorizontalAlignment(SwingConstants.LEFT);
-            } else {
-              setHorizontalAlignment(SwingConstants.LEFT);
-            }
+            setHorizontalAlignment(SwingConstants.LEFT);
 
             return this;
           }
