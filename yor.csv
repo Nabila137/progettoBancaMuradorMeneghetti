@@ -1,0 +1,4 @@
+Username | Password | Name | Surname | Portafoglio | Salary | ContoBancario | InitialDate | Number of investments | File
+yor  | hello2  | Yor  | Forger  | 1900.0  | 1000  | 102.19  | 2027-02-16  | 1  | yorHistory.csv
+Amount | Risk | Duration | Start date | Guadagno | Success Percentage
+0.01 | 85 | 2 | 2027-02-16 | 2.0 | 25
