@@ -19,11 +19,9 @@ public class InvestmentsPanel extends JPanel {
     setBackground(BACKGROUND_COLOR);
     setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-    // Create title panel
     JPanel titlePanel = createTitlePanel();
     add(titlePanel, BorderLayout.NORTH);
 
-    // Create main content panel
     JPanel contentPanel = createContentPanel(bank);
     add(contentPanel, BorderLayout.CENTER);
   }
@@ -46,24 +44,24 @@ public class InvestmentsPanel extends JPanel {
     panel.setBackground(BACKGROUND_COLOR);
     panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
-    // Column names
     String[] columns = {"Date", "Amount", "Duration", "Risk", "Gain/Loss", "End Date"};
 
     // Create table model
     DefaultTableModel model =
         new DefaultTableModel(columns, 0) {
-          @Override // What is this? Where is it used?
+          @Override
+          // What is this? Where is it used?
           public boolean isCellEditable(int row, int column) {
             return false;
           }
 
-          @Override // I have no idea what this is
+          @Override
+          // I have no idea what this is
           public Class<?> getColumnClass(int columnIndex) {
             return String.class;
           }
         };
 
-    // Get investments from bank
     List<Investment> investments = bank.getUtente().getAccount().getInvestments();
 
     if (investments.isEmpty()) {
@@ -72,11 +70,11 @@ public class InvestmentsPanel extends JPanel {
       noDataLabel.setForeground(new Color(120, 120, 120));
       panel.add(noDataLabel, BorderLayout.CENTER);
     } else {
-      // Use DateTimeFormatter for LocalDate
+
       DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
       for (Investment inv : investments) {
-        // Safely format LocalDate objects
+
         String startDate =
             inv.getStartDate() != null ? inv.getStartDate().format(dateFormatter) : "N/A";
         String endDate = inv.getEndDate() != null ? inv.getEndDate().format(dateFormatter) : "N/A";
@@ -107,21 +105,19 @@ public class InvestmentsPanel extends JPanel {
   }
 
   private void styleTable(JTable table) {
-    // Table styling
+
     table.setRowHeight(30);
     table.setFont(TABLE_FONT);
     table.setShowGrid(false);
     table.setIntercellSpacing(new Dimension(0, 0));
     table.setSelectionBackground(new Color(220, 240, 255));
 
-    // Header styling
     JTableHeader header = table.getTableHeader();
     header.setFont(HEADER_FONT);
     header.setBackground(HEADER_COLOR);
     header.setForeground(Color.BLACK);
     header.setPreferredSize(new Dimension(header.getWidth(), 35));
 
-    // Row striping
     table.setDefaultRenderer(
         Object.class,
         new DefaultTableCellRenderer() {
@@ -139,7 +135,6 @@ public class InvestmentsPanel extends JPanel {
               setBackground(row % 2 == 0 ? ROW_COLOR : ALT_ROW_COLOR);
             }
 
-            // Right-align numeric columns
             if (column == 1 || column == 4) {
               setHorizontalAlignment(SwingConstants.LEFT);
             } else {
@@ -156,18 +151,12 @@ public class InvestmentsPanel extends JPanel {
   }
 
   private String formatRisk(int risk) {
-    /*if (risk >= 70) return "High (" + risk + "%)";
-    if (risk >= 40) return "Medium (" + risk + "%)";
-    return "Low (" + risk + "%)";*/
+
     return risk + "%";
   }
 
   private String formatGainLoss(double gain) {
-    /*if (gain >= 0) {
-        return String.format("+$%,.2f", gain);
-    } else {
-        return String.format("-$%,.2f", Math.abs(gain));
-    }*/
+
     return gain * 100 + "%";
   }
 }

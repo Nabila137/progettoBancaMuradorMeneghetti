@@ -6,17 +6,13 @@ public class Investment {
   private double amount;
   private int rischio;
   private int durata;
-  private LocalDate
-      startDate; // take the initial date which changes every time I move to the next month
+  private LocalDate startDate;
   private LocalDate endDate;
   private double guadagno;
   private double ritorno;
-  private int successPercentage =
-      Methods.randomNumber(
-          1, 100); // this way it changes every time I make a move (a little bit casual).
+  private int successPercentage = Methods.randomNumber(1, 100);
 
   public Investment(double amount, int rischio, int durata, LocalDate startDate, double guadagno) {
-    // this.successPercentage = randomNumber(1, 100);
     this.amount = amount;
     this.rischio = rischio;
     this.durata = durata;
@@ -46,12 +42,7 @@ public class Investment {
   public double ricavo(int percentualeSuccesso, int rischio, double investimento, double guadagno) {
 
     double ritorno = -1;
-    // System.out.println("Percentuale Successo: " + percentualeSuccesso);
-    // System.out.println("Rischio: " + rischio);
-    // System.out.println("investimento: " + investimento);
-    // System.out.println("guadagno: " + guadagno);
     double successRate = (double) percentualeSuccesso / 100;
-    // System.out.println("successRate: " + successRate);
     double gainLose = investimento * successRate * guadagno;
     if ((percentualeSuccesso <= 100)
         && (percentualeSuccesso >= 0)
@@ -85,7 +76,7 @@ public class Investment {
   }
 
   public LocalDate getEndDate() {
-    return endDate; // calculateEndDate(startDate, durata);
+    return endDate;
   }
 
   public double getGuadagno() {
@@ -93,7 +84,7 @@ public class Investment {
   }
 
   public double getRitorno() {
-    return ritorno; // ricavo(successPercentage, rischio, amount, guadagno);
+    return ritorno;
   }
 
   public int getSuccessPercentage() {
@@ -113,10 +104,4 @@ public class Investment {
     s += "Return: " + ritorno;
     return s;
   }
-
-  // public static void main (String [] args) {
-
-  // System.out.println(ricavo (23, 50, 200.0, 0.05));
-  // System.out.println (randomNumber(1, 100));
-  // }
 }

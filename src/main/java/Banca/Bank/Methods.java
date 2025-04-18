@@ -22,10 +22,8 @@ public class Methods {
         Scanner input = new Scanner(reader)) {
       String riga;
       if (input.hasNextLine()) {
-        riga =
-            input
-                .nextLine(); // ignoring the first line (I don't know if it's the correct way
-                             // though.)
+        riga = input.nextLine(); // ignoring the first line
+        // (I don't know if it's the correct way though.)
         if (input.hasNextLine()) {
           riga = input.nextLine();
           try {
@@ -226,7 +224,7 @@ public class Methods {
     return ok;
   }
 
-  // Posso generalizzarlo. Update File and this one are very similar. Let's think about it later ^.^
+  // Posso generalizzarlo. Update File and this one are very similar. Let's think about it later
   // A separate method to update a field which will return a String.
   // A generic method to update that line of the file (it can have "from" and "to" parameter).
   public static boolean updateInvestments(String fileName, int from, String s) {

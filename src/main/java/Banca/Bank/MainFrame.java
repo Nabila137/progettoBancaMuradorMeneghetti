@@ -371,8 +371,7 @@ public class MainFrame extends JFrame {
       case "Settings":
         showSettingsDialog();
         break;
-      case "Help": // cancel it-->Change profile picture. It can give some options (a predefined
-                   // list)
+      case "Help":
         showHelpDialog();
         break;
       case "Logout":
@@ -798,8 +797,7 @@ public class MainFrame extends JFrame {
               if (risk > 0 && gain > 0) {
                 if (DepositWithdraw.canDepositWithdraw(
                     bank.getUtente().getAccount().getContoBancario(), amount)) {
-                  ; // .canMakeInvestment(bank.getUtente().getAccount().getContoBancario(), amount))
-                    // {
+
                   Investment x =
                       new Investment(
                           amount,
